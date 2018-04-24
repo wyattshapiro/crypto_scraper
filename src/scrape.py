@@ -1,13 +1,10 @@
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
-# from bs4 import BeautifulSoup
-# import requests
+import config as config
 
 COINMARKET_URL = "https://coinmarketcap.com/currencies/"
-HEADERS = {'User-Agent': 'Mozilla/5.0'}
-START_DATE = "20130428"
-END_DATE = "20180319"
+
 
 def initChromeDriver():
     driver = webdriver.Chrome()
@@ -21,33 +18,27 @@ def initChromeDriver():
 
 def getCoinHistory(coin):
     try:
-        url = COINMARKET_URL + coin + "/historical-data/?start=" + START_DATE + "&end=" + END_DATE
+        url = COINMARKET_URL + coin + "/historical-data/?start=" + config.START_DATE + "&end=" + config.END_DATE
         driver = initChromeDriver()
         driver.get(url)
         table_soup = driver.find_element_by_xpath('//*[@id="historical-data"]//table')
         table_html = table_soup.get_attribute('outerHTML')
         table_df = pd.read_html(table_html)[0]
-        print(len(table_df))
+        print("Number of days scraped: %s" % len(table_df))
         driver.close()
-
-        # response = requests.get(url, headers=HEADERS)
-        # all_html = BeautifulSoup(response.content, 'lxml')
-        # table_html = all_html.find('table')[1]
-        # print(len(table_html))
-        # table_df = pd.read_html(table_html)
 
         return True, table_df
     except Exception, e:
         print(e)
         table_df = None
-        # driver.close()
+        driver.close()
+
         return False, table_df
 
 
 def writeDF(coin, price_df):
     try:
-        output_path = "/Users/wyattshapiro/projects/cloudburst/crypto_data/results/" + coin + "_" + START_DATE + "_" + END_DATE + ".csv"
-        price_df.to_csv(output_path, index=False, index_label=False)
+        price_df.to_csv(path_or_buf=config.OUTPUT_PATH, index=False, index_label=False)
         return True
     except Exception, e:
         print(e)
@@ -55,15 +46,14 @@ def writeDF(coin, price_df):
 
 
 def run():
-    coin_list = ["ethereum", "ripple", "bitcoin"]
-    for coin in coin_list:
-        print(coin)
-        scrape_success, table_df = getCoinHistory(coin)
-        print("Scrape success %s" % scrape_success)
-        if scrape_success:
-            write_success = writeDF(coin, table_df)
-            print("Write success %s" % write_success)
-        print("-"*30)
+    print("Scraping %s from CoinMarketCap" % config.COIN)
+    scrape_success, table_df = getCoinHistory(config.COIN)
+    print("Scrape success %s" % scrape_success)
+    if scrape_success:
+        write_success = writeDF(config.COIN, table_df)
+        print("Write success %s" % write_success)
+    print("-"*30)
+
 
 if __name__ == "__main__":
     run()
