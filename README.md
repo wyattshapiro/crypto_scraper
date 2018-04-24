@@ -2,6 +2,15 @@
 
 Scrapes historical price data for a crypto currency from CoinMarketCap.
 
+
+## License
+Copyright (c) Wyatt Shapiro 2018
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+
 ## Installation
 
 Clone the repo onto your machine with the following command:
@@ -24,12 +33,16 @@ $ source venv/bin/activate
 
 See https://virtualenv.pypa.io/en/stable/ for more information.
 
+--------
+
 We use pip to install dependencies, which comes installed in a virtualenv.
 You can run the following to install dependencies:
 
 $ pip install -r requirements.txt
 
 See https://pip.pypa.io/en/stable/installing/ for information.
+
+--------
 
 We use ChromeDriver 2.38 to spin up a Chrome browser.
 
@@ -52,6 +65,7 @@ Configured in src/config.py file
 - COIN: coin you want to scrape
 - START_DATE: date you want to start scraping
 - END_DATE: date you want to stop scraping
+
 
 ## Execution
 You can run the following to execute program based on Inputs:
