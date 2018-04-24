@@ -19,7 +19,7 @@ We use virtualenv to manage dependencies, if you have it installed you can run
 the following commands from the root code directory to create the environment and
 activate it:
 
-$ virtualenv venv
+$ virtualenv venv  
 $ source venv/bin/activate
 
 See https://virtualenv.pypa.io/en/stable/ for more information.
