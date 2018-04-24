@@ -56,5 +56,5 @@ Configured in src/config.py file
 ## Execution
 You can run the following to execute program based on Inputs:
 
-$ cd [path/to/crypto_scraper/dir]
+$ cd [path/to/crypto_scraper/dir]  
 $ python src/scrape.py
