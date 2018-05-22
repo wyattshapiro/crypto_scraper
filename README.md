@@ -53,22 +53,17 @@ See https://sites.google.com/a/chromium.org/chromedriver/ for more information.
 
 - BASE_DIR: base directory of program
 - HEADERS: headers used in Chrome browser
-- COIN: coin you want to scrape
+- HEADLESS: Rrue if you want to run the browser headlessly
 - START_DATE: date you want to start scraping
 - END_DATE: date you want to stop scraping
 - OUTPUT_PATH: location of file you want to write out data
 
-
 ## Inputs
-Configured in src/config.py file
 
-- COIN: coin you want to scrape
-- START_DATE: date you want to start scraping
-- END_DATE: date you want to stop scraping
-
+coin_name: name of any coin listed on CoinMarketCap ex. Bitcoin, Ripple, Ethereum, etc.
 
 ## Execution
-You can run the following to execute program based on Inputs:
+You can run the following to execute program by calling the following commands:
 
-$ cd [path/to/crypto_scraper/dir]  
-$ python src/scrape.py
+$ cd [path/to/dir_crypto_scraper/src]  
+$ python scrape.py [coin_name]
